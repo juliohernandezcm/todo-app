@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+	--bg-color: #16161a;
+	--bg-input: #1f2125;
+	--primary: #02b075;
+}
+
+body {
+	display: flex;
+	justify-content: center;
+	background-color: var(--bg-color);
+	color: #ffffff;
+}
