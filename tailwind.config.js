@@ -5,8 +5,13 @@ export default {
 		colors: {
 			primary: '#02b075',
 			secondary: '#ff4837',
+			gray: '#494848',
 		},
-		extend: {},
+		extend: {
+			fontFamily: {
+				roboto: ['Roboto', 'sans-serif'],
+			},
+		},
 	},
 	plugins: [],
 };
