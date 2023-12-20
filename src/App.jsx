@@ -58,6 +58,29 @@ function App() {
 		(todo) => todo.isCompleted === true
 	).length;
 
+	// toggleCompleteTodos
+	const toggleCompleteTodos = (id) => {
+		const updatedTodos = [...todos];
+
+		const todoIndex = updatedTodos.findIndex((todo) => todo.id === id);
+
+		updatedTodos[todoIndex].isCompleted =
+			!updatedTodos[todoIndex].isCompleted;
+
+		setTodos(updatedTodos);
+	};
+
+	// deleteTodos
+	const deleteTodos = (id) => {
+		const updatedTodos = [...todos];
+
+		const todoIndex = updatedTodos.findIndex((todo) => todo.id === id);
+
+		updatedTodos.splice(todoIndex, 1);
+
+		setTodos(updatedTodos);
+	};
+
 	return (
 		<Layout>
 			<TodoCounter total={totalTodos} completed={completedTodos} />
@@ -72,6 +95,9 @@ function App() {
 							key={todo.id}
 							description={todo.description}
 							completed={todo.isCompleted}
+							toggleCompleteTodos={toggleCompleteTodos}
+							deleteTodos={deleteTodos}
+							id={todo.id}
 						/>
 					))}
 				</TodoList>
