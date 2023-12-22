@@ -8,32 +8,47 @@ import { TodoList } from './components/TodoList';
 import { TodoItem } from './components/TodoItem';
 import { TodoAddButton } from './components/TodoAddButton';
 
-const todoList = [
-	{
-		id: crypto.randomUUID(),
-		description: 'Estudiar React',
-		isCompleted: false,
-	},
-	{
-		id: crypto.randomUUID(),
-		description: 'Hacer la Cama',
-		isCompleted: false,
-	},
-	{
-		id: crypto.randomUUID(),
-		description: 'Leer sobre integration test',
-		isCompleted: true,
-	},
-	{
-		id: crypto.randomUUID(),
-		description: '¿Qué día es mañana',
-		isCompleted: false,
-	},
-];
+// const todoList = [
+// 	{
+// 		id: crypto.randomUUID(),
+// 		description: 'Estudiar React',
+// 		isCompleted: false,
+// 	},
+// 	{
+// 		id: crypto.randomUUID(),
+// 		description: 'Hacer la Cama',
+// 		isCompleted: false,
+// 	},
+// 	{
+// 		id: crypto.randomUUID(),
+// 		description: 'Leer sobre integration test',
+// 		isCompleted: true,
+// 	},
+// 	{
+// 		id: crypto.randomUUID(),
+// 		description: '¿Qué día es mañana',
+// 		isCompleted: false,
+// 	},
+// ];
+
+// localStorage.setItem('todos_v1', JSON.stringify(todoList));
+
+// localStorage.removeItem('todos_v1');
 
 function App() {
+	const localStorageTodos = localStorage.getItem('todos_v1');
+
+	let parsedTodos;
+
+	if (!localStorageTodos) {
+		localStorage.setItem('todos_v1', JSON.stringify([]));
+		parsedTodos = [];
+	} else {
+		parsedTodos = JSON.parse(localStorageTodos);
+	}
+
 	// useState: todos
-	const [todos, setTodos] = useState(todoList);
+	const [todos, setTodos] = useState(parsedTodos);
 
 	// useState: searchValue
 	const [searchValue, setSearchValue] = useState('');
@@ -58,6 +73,12 @@ function App() {
 		(todo) => todo.isCompleted === true
 	).length;
 
+	const saveTodos = (newTodos) => {
+		localStorage.setItem('todos_v1', JSON.stringify(newTodos));
+
+		setTodos(newTodos);
+	};
+
 	// toggleCompleteTodos
 	const toggleCompleteTodos = (id) => {
 		const updatedTodos = [...todos];
@@ -67,7 +88,7 @@ function App() {
 		updatedTodos[todoIndex].isCompleted =
 			!updatedTodos[todoIndex].isCompleted;
 
-		setTodos(updatedTodos);
+		saveTodos(updatedTodos);
 	};
 
 	// deleteTodos
@@ -78,7 +99,7 @@ function App() {
 
 		updatedTodos.splice(todoIndex, 1);
 
-		setTodos(updatedTodos);
+		saveTodos(updatedTodos);
 	};
 
 	return (
