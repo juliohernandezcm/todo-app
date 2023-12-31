@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useLocalStorage } from '../src/hooks/useLocalStorage.js';
 import './App.css';
 import { Layout } from './components/Layout';
 import { Footer } from './components/Footer';
@@ -36,21 +37,8 @@ import { TodoAddButton } from './components/TodoAddButton';
 // localStorage.removeItem('todos_v1');
 
 function App() {
-	const localStorageTodos = localStorage.getItem('todos_v1');
+	const [todos, saveTodos] = useLocalStorage('todos_v1', []);
 
-	let parsedTodos;
-
-	if (!localStorageTodos) {
-		localStorage.setItem('todos_v1', JSON.stringify([]));
-		parsedTodos = [];
-	} else {
-		parsedTodos = JSON.parse(localStorageTodos);
-	}
-
-	// useState: todos
-	const [todos, setTodos] = useState(parsedTodos);
-
-	// useState: searchValue
 	const [searchValue, setSearchValue] = useState('');
 
 	const searchedTodos = todos.filter((todo) => {
@@ -67,19 +55,12 @@ function App() {
 		return todoDescription.includes(searchText);
 	});
 
-	// Estados derivados: totalTodos, completedTodos
 	const totalTodos = todos.length;
+
 	const completedTodos = todos.filter(
 		(todo) => todo.isCompleted === true
 	).length;
 
-	const saveTodos = (newTodos) => {
-		localStorage.setItem('todos_v1', JSON.stringify(newTodos));
-
-		setTodos(newTodos);
-	};
-
-	// toggleCompleteTodos
 	const toggleCompleteTodos = (id) => {
 		const updatedTodos = [...todos];
 
@@ -91,7 +72,6 @@ function App() {
 		saveTodos(updatedTodos);
 	};
 
-	// deleteTodos
 	const deleteTodos = (id) => {
 		const updatedTodos = [...todos];
 
