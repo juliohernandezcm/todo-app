@@ -9,7 +9,7 @@ export const TodoItem = ({
 	deleteTodos,
 }) => {
 	return (
-		<li className='todo__item flex flex-row justify-between mb-6 py-2 px-4 rounded-lg'>
+		<li className='todo__item flex flex-row justify-between mb-6 py-2 px-4 rounded-lg h-12 mx-4'>
 			<div>
 				<CheckBadgeIcon
 					onClick={() => toggleCompleteTodos(id)}

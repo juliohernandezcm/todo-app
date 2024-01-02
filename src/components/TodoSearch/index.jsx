@@ -6,7 +6,7 @@ export const TodoSearch = ({ searchValue, setSearchValue }) => {
 	};
 
 	return (
-		<div className='flex justify-center my-8'>
+		<div className='flex justify-center my-8 h-12'>
 			<input
 				className='rounded-lg px-4 py-2 w-5/6   contrast-more:border-primary'
 				type='text'

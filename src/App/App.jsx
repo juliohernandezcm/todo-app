@@ -31,7 +31,12 @@ import './App.css';
 // localStorage.removeItem('todos_v1');
 
 function App() {
-	const [todos, saveTodos] = useLocalStorage('todos_v1', []);
+	const {
+		item: todos,
+		saveItem: saveTodos,
+		loading,
+		error,
+	} = useLocalStorage('todos_v1', []);
 
 	const [searchValue, setSearchValue] = useState('');
 
@@ -87,6 +92,8 @@ function App() {
 			completedTodos={completedTodos}
 			toggleCompleteTodos={toggleCompleteTodos}
 			deleteTodos={deleteTodos}
+			loading={loading}
+			error={error}
 		/>
 	);
 }
