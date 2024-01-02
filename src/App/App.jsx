@@ -1,13 +1,7 @@
 import { useState } from 'react';
-import { useLocalStorage } from '../src/hooks/useLocalStorage.js';
+import { useLocalStorage } from '../hooks/useLocalStorage.js';
+import { AppUI } from './AppUI.jsx';
 import './App.css';
-import { Layout } from './components/Layout';
-import { Footer } from './components/Footer';
-import { TodoCounter } from './components/TodoCounter';
-import { TodoSearch } from './components/TodoSearch';
-import { TodoList } from './components/TodoList';
-import { TodoItem } from './components/TodoItem';
-import { TodoAddButton } from './components/TodoAddButton';
 
 // const todoList = [
 // 	{
@@ -83,29 +77,17 @@ function App() {
 	};
 
 	return (
-		<Layout>
-			<TodoCounter total={totalTodos} completed={completedTodos} />
-			<main className='p-4'>
-				<TodoSearch
-					searchValue={searchValue}
-					setSearchValue={setSearchValue}
-				/>
-				<TodoList>
-					{searchedTodos.map((todo) => (
-						<TodoItem
-							key={todo.id}
-							description={todo.description}
-							completed={todo.isCompleted}
-							toggleCompleteTodos={toggleCompleteTodos}
-							deleteTodos={deleteTodos}
-							id={todo.id}
-						/>
-					))}
-				</TodoList>
-				<TodoAddButton />
-			</main>
-			<Footer />
-		</Layout>
+		<AppUI
+			todos={todos}
+			saveTodos={saveTodos}
+			searchValue={searchValue}
+			setSearchValue={setSearchValue}
+			searchedTodos={searchedTodos}
+			totalTodos={totalTodos}
+			completedTodos={completedTodos}
+			toggleCompleteTodos={toggleCompleteTodos}
+			deleteTodos={deleteTodos}
+		/>
 	);
 }
 
