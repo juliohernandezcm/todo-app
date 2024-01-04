@@ -1,7 +1,6 @@
-import { useState } from 'react';
-import { useLocalStorage } from '../hooks/useLocalStorage.js';
 import { AppUI } from './AppUI.jsx';
 import './App.css';
+import { TodoProvider } from '../context/index.jsx';
 
 // const todoList = [
 // 	{
@@ -31,70 +30,10 @@ import './App.css';
 // localStorage.removeItem('todos_v1');
 
 function App() {
-	const {
-		item: todos,
-		saveItem: saveTodos,
-		loading,
-		error,
-	} = useLocalStorage('todos_v1', []);
-
-	const [searchValue, setSearchValue] = useState('');
-
-	const searchedTodos = todos.filter((todo) => {
-		const todoDescription = todo.description
-			.toLocaleLowerCase()
-			.normalize('NFD')
-			.replace(/[\u0300-\u036f]/g, '');
-
-		const searchText = searchValue
-			.toLocaleLowerCase()
-			.normalize('NFD')
-			.replace(/[\u0300-\u036f]/g, '');
-
-		return todoDescription.includes(searchText);
-	});
-
-	const totalTodos = todos.length;
-
-	const completedTodos = todos.filter(
-		(todo) => todo.isCompleted === true
-	).length;
-
-	const toggleCompleteTodos = (id) => {
-		const updatedTodos = [...todos];
-
-		const todoIndex = updatedTodos.findIndex((todo) => todo.id === id);
-
-		updatedTodos[todoIndex].isCompleted =
-			!updatedTodos[todoIndex].isCompleted;
-
-		saveTodos(updatedTodos);
-	};
-
-	const deleteTodos = (id) => {
-		const updatedTodos = [...todos];
-
-		const todoIndex = updatedTodos.findIndex((todo) => todo.id === id);
-
-		updatedTodos.splice(todoIndex, 1);
-
-		saveTodos(updatedTodos);
-	};
-
 	return (
-		<AppUI
-			todos={todos}
-			saveTodos={saveTodos}
-			searchValue={searchValue}
-			setSearchValue={setSearchValue}
-			searchedTodos={searchedTodos}
-			totalTodos={totalTodos}
-			completedTodos={completedTodos}
-			toggleCompleteTodos={toggleCompleteTodos}
-			deleteTodos={deleteTodos}
-			loading={loading}
-			error={error}
-		/>
+		<TodoProvider>
+			<AppUI />
+		</TodoProvider>
 	);
 }
 

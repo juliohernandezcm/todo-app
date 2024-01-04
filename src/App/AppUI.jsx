@@ -7,26 +7,17 @@ import { TodoItem } from '../components/TodoItem/index.jsx';
 import { TodoAddButton } from '../components/TodoAddButton/index.jsx';
 import { TodoLoading } from '../components/TodoLoading/index.jsx';
 import { TodoEmpty } from '../components/TodoEmpty/index.jsx';
+import { TodoContext } from '../context/index.jsx';
+import { useContext } from 'react';
 
-export const AppUI = ({
-	searchValue,
-	setSearchValue,
-	searchedTodos,
-	totalTodos,
-	completedTodos,
-	toggleCompleteTodos,
-	deleteTodos,
-	loading,
-	error,
-}) => {
+export const AppUI = () => {
+	const { loading, error, searchedTodos, toggleCompleteTodos, deleteTodos } =
+		useContext(TodoContext);
 	return (
 		<Layout>
-			<TodoCounter total={totalTodos} completed={completedTodos} />
+			<TodoCounter />
 			<main className='grid grid-rows-[120px_minmax(400px,_1fr)_100px]'>
-				<TodoSearch
-					searchValue={searchValue}
-					setSearchValue={setSearchValue}
-				/>
+				<TodoSearch />
 				{loading && <TodoLoading />}
 				{error && <p>Opps hubo un error...</p>}
 				{!loading && searchedTodos.length === 0 && <TodoEmpty />}
