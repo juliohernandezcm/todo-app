@@ -8,11 +8,19 @@ import { TodoAddButton } from '../components/TodoAddButton/index.jsx';
 import { TodoLoading } from '../components/TodoLoading/index.jsx';
 import { TodoEmpty } from '../components/TodoEmpty/index.jsx';
 import { TodoContext } from '../context/index.jsx';
+import { ModalWrapper } from '../components/ModalWrapper/index.jsx';
 import { useContext } from 'react';
+import { TodoModal } from '../components/TodoModal/index.jsx';
 
 export const AppUI = () => {
-	const { loading, error, searchedTodos, toggleCompleteTodos, deleteTodos } =
-		useContext(TodoContext);
+	const {
+		loading,
+		error,
+		searchedTodos,
+		toggleCompleteTodos,
+		deleteTodos,
+		isOpenTodoModal,
+	} = useContext(TodoContext);
 	return (
 		<Layout>
 			<TodoCounter />
@@ -34,6 +42,7 @@ export const AppUI = () => {
 					))}
 				</TodoList>
 				<TodoAddButton />
+				<ModalWrapper>{isOpenTodoModal && <TodoModal />}</ModalWrapper>
 			</main>
 			<Footer />
 		</Layout>
