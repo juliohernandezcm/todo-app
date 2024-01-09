@@ -12,7 +12,7 @@ const TodoProvider = ({ children }) => {
 	} = useLocalStorage('todos_v1', []);
 
 	const [searchValue, setSearchValue] = useState('');
-	const [isOpenTodoModal, setIsOpenTodoModal] = useState(true);
+	const [isOpenTodoModal, setIsOpenTodoModal] = useState(false);
 
 	const searchedTodos = todos.filter((todo) => {
 		const todoDescription = todo.description
