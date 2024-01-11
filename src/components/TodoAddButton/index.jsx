@@ -3,10 +3,10 @@ import './TodoAddButton.css';
 import { TodoContext } from '../../context';
 
 export const TodoAddButton = () => {
-	const { setIsOpenTodoModal } = useContext(TodoContext);
+	const { setShowModal } = useContext(TodoContext);
 
 	const handleClick = () => {
-		setIsOpenTodoModal(true);
+		setShowModal(true);
 	};
 
 	return (

@@ -19,7 +19,7 @@ export const AppUI = () => {
 		searchedTodos,
 		toggleCompleteTodos,
 		deleteTodos,
-		isOpenTodoModal,
+		showModal,
 	} = useContext(TodoContext);
 	return (
 		<Layout>
@@ -42,7 +42,7 @@ export const AppUI = () => {
 					))}
 				</TodoList>
 				<TodoAddButton />
-				<ModalWrapper>{isOpenTodoModal && <TodoModal />}</ModalWrapper>
+				<ModalWrapper>{showModal && <TodoModal />}</ModalWrapper>
 			</main>
 			<Footer />
 		</Layout>

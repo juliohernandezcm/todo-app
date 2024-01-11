@@ -6,6 +6,8 @@ export default {
 			primary: '#02b075',
 			secondary: '#ff4837',
 			gray: '#494848',
+			input: '#1f2125',
+			background: '#16161a',
 		},
 		extend: {
 			fontFamily: {
