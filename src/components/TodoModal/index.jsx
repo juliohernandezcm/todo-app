@@ -49,7 +49,8 @@ export const TodoModal = () => {
 							Cancel
 						</button>
 						<button
-							className='bg-primary m-4 py-2 px-4 rounded-lg w-28'
+							disabled={!newTodoValue ? true : false}
+							className='bg-primary m-4 py-2 px-4 rounded-lg w-28 disabled:opacity-50'
 							onClick={onAddButton}
 						>
 							Add
